@@ -1,0 +1,250 @@
+John Fulgoni
+UNI: jsf2154
+report.txt
+==============================
+
+A) ==>
+
+After simply adding the words in a 2-word window (and the head), and Remove Punctuation from before:
+
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.653 (1296.00 correct of 1985.00 attempted)
+ recall: 0.653 (1296.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+ Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.817 (1722.00 correct of 2107.00 attempted)
+ recall: 0.817 (1722.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+ 
+ Fine-grained score for "Best-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.828 (938.00 correct of 1133.00 attempted)
+ recall: 0.828 (938.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+ 
+Getting stalled when I try to load the tagger for catalan/spanish - Ignoring for now.
+POS generally seems to make the scores worse, so I'm choosing to ignore them for all languages.
+Time also significantly increases by using the tagger, so I'd rather have a fast program that works.
+ 
+After Adding PoS:
+
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.653 (1296.00 correct of 1985.00 attempted)
+ recall: 0.653 (1296.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+
+Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.830 (1749.00 correct of 2107.00 attempted)
+ recall: 0.830 (1749.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+
+While the results improve slightly, I choose to leave out PoS in the final implementation
+
+After Adding Word Counts:
+
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.679 (1348.00 correct of 1985.00 attempted)
+ recall: 0.679 (1348.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.838 (1766.00 correct of 2107.00 attempted)
+ recall: 0.838 (1766.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+ 
+Fine-grained score for "Best-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.858 (972.00 correct of 1133.00 attempted)
+ recall: 0.858 (972.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+ 
+ Adding word counts clearly gives the biggest boost to performance out of all the methods.
+ In Part A, we got solid results by only using word counts within a window.
+ Already, with adding word counts, and collocational information 
+ 
+====================================
+B) -->
+After using POS features, and Stemming (time also significantly increases with POS)
+
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.645 (1280.00 correct of 1985.00 attempted)
+ recall: 0.645 (1280.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+ 
+ Just Stemming:
+ Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.657 (1305.00 correct of 1985.00 attempted)
+ recall: 0.657 (1305.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+ Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.814 (1715.00 correct of 2107.00 attempted)
+ recall: 0.814 (1715.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+ 
+ Got an error when stemming Catalan using Spanish stemmer
+ 
+ Doesn't make sense to remove stopwords with the Collocational, since it's based on proximity.
+ Removing the stopwords from the count gave a higher precision, but I don't remove them from collocational word set.
+
+ I chose not to use stemming for the sake of time, and lost minimal accuracy.
+ 
+Adjusting English Window size:
+Note that the bigger the window, the more sacrifice for time
+
+20-
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.666 (1322.00 correct of 1985.00 attempted)
+ recall: 0.666 (1322.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+
+15-
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.668 (1326.00 correct of 1985.00 attempted)
+ recall: 0.668 (1326.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+After trial and error, I decided on different window sizes for each language that gave the best results in a timely fashion.
+
+===================================
+C) =====> Adding Frequent Words
+
+I couldn't figure out C in time without getting errors, so I decided to leave it out.
+I figured I would lose points for this section, but it's better than handing in the homework and day late and losing 10%.
+Along with the fact that my accuracies are already above (or for English .001 below) the thresholds for submission, it's probably not worth the 10% deduction.
+
+====================================
+D) ==> After adding Synonyms
+
+
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.656 (1303.00 correct of 1985.00 attempted)
+ recall: 0.656 (1303.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+
+Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.837 (1764.00 correct of 2107.00 attempted)
+ recall: 0.837 (1764.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+
+Fine-grained score for "Best-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.854 (968.00 correct of 1133.00 attempted)
+ recall: 0.854 (968.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+ 
+ Adding the synonyms for the word keeps the accuracy high, but still lowers the values by a little bit.
+ While the difference for Catalan and Spanish were very small, the difference in performance for English is considerable.
+ I decided to leave synonyms out in the end.
+
+==============================
+E) ====> Attempting Chi2 Feature Selection:
+
+I use the Chi2 Feature selection with a K of 0.9 times the number of features available.
+
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.671 (1332.00 correct of 1985.00 attempted)
+ recall: 0.671 (1332.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.842 (1774.00 correct of 2107.00 attempted)
+ recall: 0.842 (1774.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+ 
+Fine-grained score for "Best-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.863 (978.00 correct of 1133.00 attempted)
+ recall: 0.863 (978.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+ 
+For English, I could not find a good value that worked to improve the precision and recall.
+Using feature selection for Spanish improved the value a small amount.
+ 
+==============================
+Conclusions:
+
+So in the end, I decided to keep the word count within a given window, nearby words +- 2 spaces, the head,
+remove punctuation, remove stopwords in the word count (not nearby words), and changing the word size for each set.
+
+I know word count has a tremendous impact on getting the right sense, just because you know what other words exist in the same space.
+Adding nearby words also makes sense to increase accuracy, because the surrounding context will give a better sense of what someone is trying to convey.
+Removing stopwords from the counts makes complete sense, because stopwords appear often (naturally), which means their removal will make the count values much more interesting.
+
+I find it really interesting that some features work and some don't.
+My original assumption was that adding more features would only serve to give highe accuracy, since it should be more clear which sense belongs where.
+For instance, I thought it would make sense to better guess the word's meaning, but that's not the case.
+Maybe if you could define hard rules, like 'home' preceded by 'new' means that 'home' is a house, not home-plate.
+This is done with adding nearby words, but maybe adding the parts of speech with this is overkill.
+
+I'm also kind of surprised that synonyms in general don't improve performance as much as other features.
+I thought that if you could say words that are related to your word, you could get the meaning even easier.
+
+I'm sure there is a method of feature selection that actually gives an increase in precision, but I wasn't just able to find one with trial and error.
+In concept it makes sense, that taking only the 'good' features should make classification better.
+
+I think the reason that English is generally worse that the other two is that it is naturally a more ambiguous language.
+There are more words in total (I believe), and there's a lot more ways to convey a message than in Spanish.
+When there are more ways to express something, I would imagine it's harder to get the exact meaning of a written sentence.
+In Spanish (and I assume Catalan) there are fewer ways to convey a certain message, and there's a lot less ambiguity in certain words.
+We have more expressions in English, which means to misunderstandings, even in real life.
+I believe in Catalan, words are trimmed even further, which means that there is even less ambiguity between words, although I'm only speculating.
+
+==============================
+English Results:
+
+Total Time: 3.0:55.0390269756 (@Warsaw)
+
+Fine-grained score for "SVM-English.answer" using key "data/English-dev.key":
+ precision: 0.613 (1216.00 correct of 1985.00 attempted)
+ recall: 0.613 (1216.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+Fine-grained score for "KNN-English.answer" using key "data/English-dev.key":
+ precision: 0.550 (1092.00 correct of 1985.00 attempted)
+ recall: 0.550 (1092.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+Fine-grained score for "Best-English.answer" using key "data/English-dev.key":
+ precision: 0.679 (1348.00 correct of 1985.00 attempted)
+ recall: 0.679 (1348.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+ 
+ 
+================================
+Spanish Results:
+
+Total Time: 1.0:58.2742350101 (@Warsaw)
+
+Fine-grained score for "SVM-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.785 (1653.00 correct of 2107.00 attempted)
+ recall: 0.785 (1653.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+ 
+Fine-grained score for "KNN-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.688 (1449.00 correct of 2107.00 attempted)
+ recall: 0.688 (1449.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+ 
+Fine-grained score for "Best-Spanish.answer" using key "data/Spanish-dev.key":
+ precision: 0.842 (1774.00 correct of 2107.00 attempted)
+ recall: 0.842 (1774.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+
+===================================
+Catalan Results:
+
+Total Time: 1.0:20.7627477646 (@Warsaw)
+
+Fine-grained score for "SVM-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.825 (935.00 correct of 1133.00 attempted)
+ recall: 0.825 (935.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+ 
+Fine-grained score for "KNN-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.707 (801.00 correct of 1133.00 attempted)
+ recall: 0.707 (801.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
+
+Fine-grained score for "Best-Catalan.answer" using key "data/Catalan-dev.key":
+ precision: 0.863 (978.00 correct of 1133.00 attempted)
+ recall: 0.863 (978.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
